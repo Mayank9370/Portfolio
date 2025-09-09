@@ -1,94 +1,90 @@
-import React from 'react';
-import { Code, Database, Globe, Smartphone } from 'lucide-react';
+import React from "react";
+import { Code, Database, Globe } from "lucide-react";
 
-const Skills = () => {
-  const skillCategories = [
-    {
-      title: 'Frontend Development',
-      icon: Globe,
-      skills: [
-        { name: 'React', level: 95 },
-        { name: 'Context API', level: 90 },
-        { name: 'Tailwind CSS', level: 95 },
-        { name: 'Bootstrap', level: 80 },
-      ],
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
-      title: 'Backend Development',
-      icon: Database,
-      skills: [
-        { name: 'Node.js', level: 90 },
-        { name: 'Python', level: 70 },
-        { name: 'Express.js', level: 80 },
-        { name: 'Java', level: 75 },
-      ],
-      color: 'from-green-500 to-emerald-500',
-    },
-    {
-      title: 'Database',
-      icon: Smartphone,
-      skills: [
-        { name: 'MySql', level: 80 },
-        { name: 'MongoDb', level: 85 },
-        { name: 'PostgreSQL', level: 75 },
-        { name: 'Mongoose', level: 80 },
-      ],
-      color: 'from-purple-500 to-pink-500',
-    },
-    {
-      title: 'Tools & Others',
-      icon: Code,
-      skills: [
-        { name: 'Git/GitHub', level: 95 },
-        { name: 'Supabase', level: 70 },
-        { name: 'AWS', level: 60 },
-        // { name: 'Figma', level: 85 },
-      ],
-      color: 'from-orange-500 to-red-500',
-    },
-  ];
+const skillCategories = [
+  {
+    title: "Frontend Development",
+    icon: Globe,
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Context API",
+      "Redux",
+      "Tailwind CSS",
+      "Bootstrap",
+    ],
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    title: "Backend Development",
+    icon: Database,
+    skills: ["Node.js", "Python", "Express.js", "Java"],
+    color: "from-green-500 to-emerald-500",
+  },
+  {
+    title: "Database",
+    icon: Database,
+    skills: ["MySQL", "MongoDB", "PostgreSQL", "Mongoose"],
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    title: "Tools & Others",
+    icon: Code,
+    skills: ["Git/GitHub", "Supabase", "AWS", "Postman"],
+    color: "from-orange-500 to-red-500",
+  },
+];
 
+export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-gray-900">
+    <section id="skills" className="py-20 bg-gray-900 h-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Skills & Expertise</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Skills & Expertise
+          </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4"></div>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Here are the technologies and tools I work with to bring ideas to life
+            Here are the technologies and tools I work with to bring ideas to
+            life
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
             return (
               <div
                 key={index}
-                className="bg-gray-800 rounded-2xl p-8 hover:bg-gray-750 transition-all duration-300 hover:scale-105 transform"
+                className="bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-all duration-500 hover:scale-105 transform shadow-lg flex flex-col animate-fade-in"
+                style={{ animationDelay: `${index * 150}ms` }}
               >
+                {/* Icon + Title */}
                 <div className="flex items-center space-x-4 mb-6">
-                  <div className={`p-3 rounded-full bg-gradient-to-r ${category.color}`}>
+                  <div
+                    className={`p-3 rounded-full bg-gradient-to-r ${category.color}`}
+                    aria-hidden="true"
+                  >
                     <Icon className="text-white" size={24} />
                   </div>
-                  <h3 className="text-xl font-semibold text-white">{category.title}</h3>
+                  <h3 className="text-xl font-semibold text-white">
+                    {category.title}
+                  </h3>
                 </div>
 
-                <div className="space-y-4">
+                {/* Skills as badges */}
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-gray-300 font-medium">{skill.name}</span>
-                        <span className="text-gray-400">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-gray-700 rounded-full h-2">
-                        <div
-                          className={`bg-gradient-to-r ${category.color} h-2 rounded-full transition-all duration-1000 ease-out`}
-                          style={{ width: `${skill.level}%` }}
-                        ></div>
-                      </div>
-                    </div>
+                    <span
+                      key={skillIndex}
+                      className="px-3 py-1 bg-gray-700 text-gray-200 rounded-full text-sm hover:bg-gray-600 transition-colors duration-300"
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -96,8 +92,23 @@ const Skills = () => {
           })}
         </div>
       </div>
+
+      {/* Tailwind custom animation */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.8s ease forwards;
+        }
+      `}</style>
     </section>
   );
-};
-
-export default Skills;
+}
