@@ -3,26 +3,37 @@ import { ExternalLink, Github, Calendar } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
-    {
-      title: 'Nutrition Tracking Application',
-      description:
-        'Developed a full-stack nutrition tracking application using React.js, Node.js, Express.js, MongoDB, Supabase (PostgreSQL), and Socket.io',
-      image:
-        'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['React', 'Node.js', 'PostgreSQL', 'Supabase'],
-      liveUrl: 'https://nutrition-tracking-app-frontend-eahv.onrender.com',
-      githubUrl: 'https://github.com/Mayank9370/Nutrition-Tracking-App',
-      date: '2025',
-    },
-    {
+      {
       title: 'Heal Zone',
       description:
         'Developed a full-stack Doctor Appointment Booking System using React, Node.js, Express, and MongoDB, enabling patients to book and manage doctor consultations online.',
       image:
         'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['React', 'Express', 'Tailwind', 'Razorpay'],
-      liveUrl: 'https://heal-zone-1-frontend.onrender.com',
+      technologies: ['React', 'Express', 'Tailwind', 'MONGODB', 'Razorpay'],
+      liveUrl: 'https://heal-zone.onrender.com',
       githubUrl: 'https://github.com/Mayank9370/Heal-Zone',
+      date: '2025',
+    },
+    {
+      title: 'Hirred',
+      description:
+        'Hirred is a full-stack job portal web app that lets users browse jobs, with secure login. Built using React (frontend) and Node.js/Express with MongoDB (backend), it offers admin and user functionality with a clean UI.',
+      image:
+        'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=400',
+      technologies: ['React', 'Express', 'Node', 'Supabase','Clerk','Shadcn'],
+      liveUrl: 'https://hirred-6jbt.onrender.com',
+      githubUrl: 'https://github.com/Mayank9370/Hirred',
+      date: '2024',
+    },
+    {
+      title: 'Nutrition Tracking Application',
+      description:
+        'Built a full-stack nutrition tracking platform with React.js, Node.js, Express.js, MongoDB, Supabase (PostgreSQL), and Socket.io, enabling users to log meals, track nutritional intake, and monitor progress in real time. Implemented authentication, interactive dashboards, and responsive design.',
+      image:
+        'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=400',
+      technologies: ['React', 'Node.js', 'PostgreSQL', 'Supabase'],
+      liveUrl: 'https://nutrition-tracking-app-frontend-eahv.onrender.com',
+      githubUrl: 'https://github.com/Mayank9370/Nutrition-Tracking-App',
       date: '2025',
     },
     {
@@ -34,17 +45,6 @@ const Projects = () => {
       technologies: ['React', 'Axios', 'API', 'PokeDex App'],
       liveUrl: 'https://poke-dex-lovat-six.vercel.app/',
       githubUrl: 'https://github.com/Mayank9370/PokeDex',
-      date: '2024',
-    },
-    {
-      title: 'EaseShope',
-      description:
-        'ShopEase is a full-stack e-commerce web app that lets users browse products, manage carts, and place orders with secure login. Built using React (frontend) and Node.js/Express with MongoDB (backend), it offers admin and user functionality with a clean UI.',
-      image:
-        'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['React', 'Express', 'Node', 'MongoDB'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/Mayank9370/Shop-Ease',
       date: '2024',
     },
     {
