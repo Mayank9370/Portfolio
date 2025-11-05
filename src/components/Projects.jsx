@@ -3,15 +3,35 @@ import { ExternalLink, Github, Calendar } from 'lucide-react';
 
 const Projects = () => {
   const projects = [
-      {
+    {
       title: 'Heal Zone',
       description:
         'Developed a full-stack Doctor Appointment Booking System using React, Node.js, Express, and MongoDB, enabling patients to book and manage doctor consultations online.',
       image:
-        'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=400',
+        'https://images.unsplash.com/photo-1758691462119-792279713969?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1332',
       technologies: ['React', 'Express', 'Tailwind', 'MONGODB', 'Razorpay'],
       liveUrl: 'https://heal-zone.onrender.com',
       githubUrl: 'https://github.com/Mayank9370/Heal-Zone',
+      date: '2025',
+    },
+    {
+      title: 'AI Powered LMS',
+      description: 'This full-stack AI-powered Learning Management System, built with MERN Stack, integrates Gemini AI for smart search, Google OAuth for authentication, and Razorpay for payments. It features dynamic student and instructor dashboards and Redux Toolkit for state management',
+      image: 'https://media.istockphoto.com/id/1772396051/photo/lms-learning-management-system-teacher-using-laptop-for-online-lesson-and-online-education.jpg?s=2048x2048&w=is&k=20&c=EiPJYS4PPwKro-de_VD2souXX9UJgA-71kJ-EpemKuE=',
+      technologies: ['React', 'Node', 'MongoDB', 'Redux'],
+      liveUrl: 'https://ai-based-lms-application-frontend.onrender.com',
+      githubUrl: 'https://github.com/Mayank9370/AI-Based-LMS-Application',
+      date: '2025'
+    },
+    {
+      title: 'Nutrition Tracking Application',
+      description:
+        'Built a full-stack nutrition tracking platform with React.js, Node.js, Express.js, MongoDB, Supabase (PostgreSQL), and Socket.io, enabling users to log meals, track nutritional intake, and monitor progress in real time. Implemented authentication, interactive dashboards, and responsive design.',
+      image:
+        'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=400',
+      technologies: ['React', 'Node.js', 'PostgreSQL', 'Supabase'],
+      liveUrl: 'https://nutrition-tracking-app-frontend-eahv.onrender.com',
+      githubUrl: 'https://github.com/Mayank9370/Nutrition-Tracking-App',
       date: '2025',
     },
     {
@@ -20,28 +40,18 @@ const Projects = () => {
         'Hirred is a full-stack job portal web app that lets users browse jobs, with secure login. Built using React (frontend) and Node.js/Express with MongoDB (backend), it offers admin and user functionality with a clean UI.',
       image:
         'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['React', 'Express', 'Node', 'Supabase','Clerk','Shadcn'],
+      technologies: ['React', 'Express', 'Node', 'Supabase', 'Clerk', 'Shadcn'],
       liveUrl: 'https://hirred-6jbt.onrender.com',
       githubUrl: 'https://github.com/Mayank9370/Hirred',
       date: '2024',
     },
-    {
-      title: 'Nutrition Tracking Application',
-      description:
-        'Built a full-stack nutrition tracking platform with React.js, Node.js, Express.js, MongoDB, Supabase (PostgreSQL), and Socket.io, enabling users to log meals, track nutritional intake, and monitor progress in real time. Implemented authentication, interactive dashboards, and responsive design.',
-      image:
-        'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['React', 'Node.js', 'PostgreSQL', 'Supabase'],
-      liveUrl: 'https://nutrition-tracking-app-frontend-eahv.onrender.com',
-      githubUrl: 'https://github.com/Mayank9370/Nutrition-Tracking-App',
-      date: '2025',
-    },
+
     {
       title: 'PokeDex',
       description:
         'A dynamic and interactive Pokédex web application built with React, leveraging the PokéAPI to display detailed Pokémon information with search and filter functionality.',
       image:
-        'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=400',
+        'https://images.unsplash.com/photo-1613771404721-1f92d799e49f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1169',
       technologies: ['React', 'Axios', 'API', 'PokeDex App'],
       liveUrl: 'https://poke-dex-lovat-six.vercel.app/',
       githubUrl: 'https://github.com/Mayank9370/PokeDex',
@@ -51,25 +61,26 @@ const Projects = () => {
       title: 'Coffee Website Application',
       description:
         'A visually appealing and fully responsive coffee shop website designed using pure HTML and CSS, showcasing menu items, featured brews, and elegant layouts.',
+
       image:
-        'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=400',
+        'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=400',
       technologies: ['HTML', 'CSS', 'JS', 'Bootstrap'],
       liveUrl:
         'https://vercel.com/mayanks-projects-45458f5b/coffee-website',
       githubUrl: 'https://github.com/Mayank9370/Coffee-Website',
       date: '2023',
     },
-    {
-      title: 'Tic Tac',
-      description:
-        'Tic Tac App is a simple two-player Tic-Tac-Toe game built with React, featuring turn-based gameplay, win detection, and a responsive UI for fun and learning.',
-      image:
-        'https://images.pexels.com/photos/8438918/pexels-photo-8438918.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['React', 'Node', 'Context API'],
-      liveUrl: 'https://tic-tac-three-mocha.vercel.app/',
-      githubUrl: 'https://github.com/Mayank9370/Tic-Tac',
-      date: '2024',
-    },
+    // {
+    //   title: 'Tic Tac',
+    //   description:
+    //     'Tic Tac App is a simple two-player Tic-Tac-Toe game built with React, featuring turn-based gameplay, win detection, and a responsive UI for fun and learning.',
+    //   image:
+    //     'https://images.pexels.com/photos/8438918/pexels-photo-8438918.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   technologies: ['React', 'Node', 'Context API'],
+    //   liveUrl: 'https://tic-tac-three-mocha.vercel.app/',
+    //   githubUrl: 'https://github.com/Mayank9370/Tic-Tac',
+    //   date: '2024',
+    // },
   ];
 
   return (
