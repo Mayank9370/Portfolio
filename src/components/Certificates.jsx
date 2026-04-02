@@ -1,128 +1,101 @@
-import React from 'react';
+import React, { memo } from 'react';
+import { motion } from 'framer-motion';
 import { Award, ExternalLink, Calendar } from 'lucide-react';
+import { certificates } from '../data/certificates';
+
+const CertificateCard = memo(({ cert }) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.3 }}
+    whileHover={{ y: -5 }}
+    className="bg-gray-800/60 rounded-2xl overflow-hidden border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 group hover:shadow-lg hover:shadow-black/20"
+  >
+    {/* Image */}
+    <div className="relative h-28 overflow-hidden">
+      <img
+        src={cert.image}
+        alt={cert.title}
+        loading="lazy"
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-gray-800 via-gray-800/50 to-transparent" />
+      <div className="absolute top-3 left-3 p-2 bg-white/10 backdrop-blur-sm rounded-full">
+        <Award className="text-white" size={16} />
+      </div>
+    </div>
+
+    {/* Content */}
+    <div className="p-5">
+      <h3 className="text-base font-semibold text-white mb-1 line-clamp-2 leading-snug">
+        {cert.title}
+      </h3>
+      <p className="text-blue-400 text-sm font-medium mb-2">{cert.issuer}</p>
+
+      <div className="flex items-center text-gray-500 text-xs mb-3">
+        <Calendar size={12} className="mr-1.5" />
+        {cert.date}
+      </div>
+
+      {cert.credentialId && (
+        <p className="text-gray-500 text-xs mb-3 truncate">
+          <span className="font-medium text-gray-400">ID:</span> {cert.credentialId}
+        </p>
+      )}
+
+      {/* Skills */}
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {cert.skills.map((skill, i) => (
+          <span
+            key={i}
+            className="px-2 py-0.5 bg-blue-500/10 text-blue-300 text-xs font-medium rounded-full"
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+
+      <a
+        href={cert.verifyUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center gap-2 w-full py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-lg hover:shadow-md hover:shadow-purple-500/20 transition-all duration-200"
+      >
+        <ExternalLink size={14} />
+        Verify
+      </a>
+    </div>
+  </motion.div>
+));
+
+CertificateCard.displayName = 'CertificateCard';
 
 const Certificates = () => {
-  const certificates = [
-    {
-      title: 'Full Stack Development',
-      issuer: 'PW Skills',
-      date: '2025',
-      credentialId: 'e3fc0bb2-61de-4b8d-9612-178e0ab2c341',
-      image: 'https://images.pexels.com/photos/5483077/pexels-photo-5483077.jpeg?auto=compress&cs=tinysrgb&w=600',
-      verifyUrl: 'https://pwskills.com/learn/certificate/8a5d5415-09ff-4b04-a1ac-388eade2aa40/',
-      skills: ['Web Developer', 'Full Stack Developer', 'MERN Stack', 'Scalability'],
-    },
-    {
-      title: 'JAVA WITH DSA AND SYSTEM DESIGN 2.0',
-      issuer: 'PW Skills',
-      date: '2025',
-      credentialId: ': b528bd59-9556-4b38-9441-f5ad3a0ae671',
-      image: 'https://images.pexels.com/photos/5483077/pexels-photo-5483077.jpeg?auto=compress&cs=tinysrgb&w=600',
-      verifyUrl: 'https://pwskills.com/learn/certificate/b528bd59-9556-4b38-9441-f5ad3a0ae671/',
-      skills: ['Java', 'DSA', 'System Design'],
-    },
-    {
-      title: 'Web Development-HTML CSS JAVASCRIPT',
-      issuer: 'Softpro India',
-      date: '2023',
-      credentialId: '',
-      image: 'https://images.pexels.com/photos/5483077/pexels-photo-5483077.jpeg?auto=compress&cs=tinysrgb&w=600',
-      verifyUrl: 'https://drive.google.com/file/d/1J06rYpm429k88nJBd8uLgGFjkd0AtEXs/view',
-      skills: ['HTML','CSS', 'JavaScript', 'Responsive Design'],
-    },
-    {
-      title: 'Web Development-JSP Servlet MySql',
-      issuer: 'CRC Training',
-      date: '2024',
-      credentialId: '',
-      image: 'https://images.pexels.com/photos/5483077/pexels-photo-5483077.jpeg?auto=compress&cs=tinysrgb&w=600',
-      verifyUrl: 'https://drive.google.com/file/d/1-9iD8l_kyCWyhVTT_S-tkfoeXLrZgSO7/view',
-      skills: ['Java','JSP','Servlet' ,'Database Design', 'MySql', ],
-    },
-    {
-      title: 'System Design',
-      issuer: 'PW Skills',
-      date: '2024',
-      credentialId: 'e3fc0bb2-61de-4b8d-9612-178e0ab2c341',
-      image: 'https://images.pexels.com/photos/5483077/pexels-photo-5483077.jpeg?auto=compress&cs=tinysrgb&w=600',
-      verifyUrl: 'https://pwskills.com/learn/certificate/e3fc0bb2-61de-4b8d-9612-178e0ab2c341/',
-      skills: ['System Design', 'Java', 'Networking', 'Security'],
-    },
-    {
-      title: 'AKTU AI Tech Hackathon 2025 ',
-      issuer: 'AKTU',
-      date: '2025',
-      credentialId: 'iA4004q29p38771uT4',
-      image: 'https://images.pexels.com/photos/5483077/pexels-photo-5483077.jpeg?auto=compress&cs=tinysrgb&w=600',
-      verifyUrl: 'https://www.guvi.in/share-certificate/iA4004q29p38771uT4',
-      skills: ['Penetration Testing', 'Vulnerability Assessment', 'Security Analysis', 'Network Security'],
-    },
-  ];
-
   return (
-    <section id="certificates" className="py-20 bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Certificates & Credentials</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Professional certifications that validate my expertise and commitment to continuous learning
+    <section id="certificates" className="py-24 bg-gray-900">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+            Certificates & Credentials
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4 rounded-full" />
+          <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+            Professional certifications validating my expertise and continuous learning
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {certificates.map((cert, index) => (
-            <div
-              key={index}
-              className="bg-gray-800 rounded-2xl overflow-hidden hover:bg-gray-750 transition-all duration-300 hover:scale-105 transform group"
-            >
-              <div className="relative">
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  className="w-full h-32 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent"></div>
-                <div className="absolute top-4 left-4">
-                  <div className="p-2 bg-white/20 backdrop-blur-sm rounded-full">
-                    <Award className="text-white" size={20} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">{cert.title}</h3>
-                <p className="text-blue-400 font-medium mb-1">{cert.issuer}</p>
-                
-                <div className="flex items-center text-gray-400 text-sm mb-3">
-                  <Calendar size={14} className="mr-2" />
-                  {cert.date}
-                </div>
-
-                <div className="text-gray-400 text-sm mb-4">
-                  <span className="font-medium">Credential ID:</span> {cert.credentialId}
-                </div>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {cert.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="px-2 py-1 bg-blue-900/50 text-blue-300 text-xs font-medium rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-
-                <a
-                  href={cert.verifyUrl}
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 w-full justify-center"
-                >
-                  <ExternalLink size={16} />
-                  <span>Verify Certificate</span>
-                </a>
-              </div>
-            </div>
+            <CertificateCard key={index} cert={cert} />
           ))}
         </div>
       </div>

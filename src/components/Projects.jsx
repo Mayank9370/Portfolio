@@ -1,180 +1,200 @@
-import React from 'react';
-import { ExternalLink, Github, Calendar } from 'lucide-react';
+import React, { useState, memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, Github, Calendar, Star, ArrowUpRight } from 'lucide-react';
+import { projects } from '../data/projects';
+
+const categories = ['All', ...new Set(projects.map((p) => p.category))];
+
+const ProjectCard = memo(({ project, isFeatured }) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.3 }}
+    whileHover={{ y: -5 }}
+    className={`bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all duration-300 ${
+      isFeatured ? 'md:col-span-2 md:grid md:grid-cols-2' : ''
+    }`}
+  >
+    {/* Image */}
+    <div className="relative overflow-hidden">
+      <img
+        src={project.image}
+        alt={project.title}
+        loading="lazy"
+        decoding="async"
+        className={`w-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ${
+          isFeatured ? 'h-full min-h-[240px]' : 'h-48'
+        }`}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      {/* Featured badge */}
+      {isFeatured && (
+        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 bg-amber-500/90 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
+          <Star size={12} fill="currentColor" />
+          Featured
+        </div>
+      )}
+
+      {/* Category tag */}
+      <div className="absolute top-3 right-3 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-700 text-xs font-medium rounded-full">
+        {project.category}
+      </div>
+
+      {/* Hover action buttons */}
+      <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+        {project.liveUrl && project.liveUrl !== '#' && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-colors"
+            aria-label="Live demo"
+          >
+            <ExternalLink size={15} className="text-gray-700" />
+          </a>
+        )}
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-colors"
+          aria-label="Source code"
+        >
+          <Github size={15} className="text-gray-700" />
+        </a>
+      </div>
+    </div>
+
+    {/* Content */}
+    <div className={`p-5 ${isFeatured ? 'sm:p-6 flex flex-col justify-center' : ''}`}>
+      <div className="flex items-center justify-between mb-2">
+        <h3 className={`font-bold text-gray-900 ${isFeatured ? 'text-xl' : 'text-lg'}`}>
+          {project.title}
+        </h3>
+        <span className="flex items-center gap-1 text-gray-400 text-xs">
+          <Calendar size={12} />
+          {project.date}
+        </span>
+      </div>
+
+      <p className={`text-gray-500 mb-4 leading-relaxed ${isFeatured ? 'text-sm' : 'text-sm line-clamp-3'}`}>
+        {project.description}
+      </p>
+
+      {/* Highlights for featured */}
+      {isFeatured && project.highlights && (
+        <ul className="space-y-1.5 mb-4">
+          {project.highlights.map((h, i) => (
+            <li key={i} className="flex items-center gap-2 text-xs text-gray-500">
+              <ArrowUpRight size={12} className="text-blue-500 shrink-0" />
+              {h}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* Tech tags */}
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {project.technologies.map((tech, i) => (
+          <span
+            key={i}
+            className="px-2.5 py-0.5 bg-gray-100 text-gray-600 text-xs font-medium rounded-full"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      {/* Action buttons */}
+      <div className="flex gap-2">
+        {project.liveUrl && project.liveUrl !== '#' && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 text-center py-2 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-lg hover:shadow-md hover:shadow-purple-500/20 transition-all duration-200"
+          >
+            Live Demo
+          </a>
+        )}
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${
+            project.liveUrl && project.liveUrl !== '#' ? 'flex-1' : 'flex-1'
+          } text-center py-2 px-4 border border-gray-200 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 transition-all duration-200`}
+        >
+          Source Code
+        </a>
+      </div>
+    </div>
+  </motion.div>
+));
+
+ProjectCard.displayName = 'ProjectCard';
 
 const Projects = () => {
-  const projects = [
-    {
-      title: 'Heal Zone',
-      description:
-        'Developed a full-stack Doctor Appointment Booking System using React, Node.js, Express, and MongoDB, enabling patients to book and manage doctor consultations online.',
-      image:
-        'https://images.unsplash.com/photo-1758691462119-792279713969?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1332',
-      technologies: ['React', 'Express', 'Tailwind', 'MONGODB', 'Razorpay'],
-      liveUrl: 'https://heal-zone.onrender.com',
-      githubUrl: 'https://github.com/Mayank9370/Heal-Zone',
-      date: '2025',
-    },
-    {
-      title: 'AI Powered LMS',
-      description: 'This full-stack AI-powered Learning Management System, built with MERN Stack, integrates Gemini AI for smart search, Google OAuth for authentication, and Razorpay for payments. It features dynamic student and instructor dashboards and Redux Toolkit for state management',
-      image: 'https://media.istockphoto.com/id/1772396051/photo/lms-learning-management-system-teacher-using-laptop-for-online-lesson-and-online-education.jpg?s=2048x2048&w=is&k=20&c=EiPJYS4PPwKro-de_VD2souXX9UJgA-71kJ-EpemKuE=',
-      technologies: ['React', 'Node', 'MongoDB', 'Redux'],
-      liveUrl: 'https://ai-based-lms-application-frontend.onrender.com',
-      githubUrl: 'https://github.com/Mayank9370/AI-Based-LMS-Application',
-      date: '2025'
-    },
-    {
-      title: 'Nutrition Tracking Application',
-      description:
-        'Built a full-stack nutrition tracking platform with React.js, Node.js, Express.js, MongoDB, Supabase (PostgreSQL), and Socket.io, enabling users to log meals, track nutritional intake, and monitor progress in real time. Implemented authentication, interactive dashboards, and responsive design.',
-      image:
-        'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['React', 'Node.js', 'PostgreSQL', 'Supabase'],
-      liveUrl: 'https://nutrition-tracking-app-frontend-eahv.onrender.com',
-      githubUrl: 'https://github.com/Mayank9370/Nutrition-Tracking-App',
-      date: '2025',
-    },
-    {
-      title: 'Hirred',
-      description:
-        'Hirred is a full-stack job portal web app that lets users browse jobs, with secure login. Built using React (frontend) and Node.js/Express with MongoDB (backend), it offers admin and user functionality with a clean UI.',
-      image:
-        'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['React', 'Express', 'Node', 'Supabase', 'Clerk', 'Shadcn'],
-      liveUrl: 'https://hirred-6jbt.onrender.com',
-      githubUrl: 'https://github.com/Mayank9370/Hirred',
-      date: '2024',
-    },
+  const [activeCategory, setActiveCategory] = useState('All');
 
-    {
-      title: 'PokeDex',
-      description:
-        'A dynamic and interactive Pokédex web application built with React, leveraging the PokéAPI to display detailed Pokémon information with search and filter functionality.',
-      image:
-        'https://images.unsplash.com/photo-1613771404721-1f92d799e49f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1169',
-      technologies: ['React', 'Axios', 'API', 'PokeDex App'],
-      liveUrl: 'https://poke-dex-lovat-six.vercel.app/',
-      githubUrl: 'https://github.com/Mayank9370/PokeDex',
-      date: '2024',
-    },
-    {
-      title: 'Coffee Website Application',
-      description:
-        'A visually appealing and fully responsive coffee shop website designed using pure HTML and CSS, showcasing menu items, featured brews, and elegant layouts.',
-
-      image:
-        'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=400',
-      technologies: ['HTML', 'CSS', 'JS', 'Bootstrap'],
-      liveUrl:
-        'https://vercel.com/mayanks-projects-45458f5b/coffee-website',
-      githubUrl: 'https://github.com/Mayank9370/Coffee-Website',
-      date: '2023',
-    },
-    // {
-    //   title: 'Tic Tac',
-    //   description:
-    //     'Tic Tac App is a simple two-player Tic-Tac-Toe game built with React, featuring turn-based gameplay, win detection, and a responsive UI for fun and learning.',
-    //   image:
-    //     'https://images.pexels.com/photos/8438918/pexels-photo-8438918.jpeg?auto=compress&cs=tinysrgb&w=400',
-    //   technologies: ['React', 'Node', 'Context API'],
-    //   liveUrl: 'https://tic-tac-three-mocha.vercel.app/',
-    //   githubUrl: 'https://github.com/Mayank9370/Tic-Tac',
-    //   date: '2024',
-    // },
-  ];
+  const filteredProjects =
+    activeCategory === 'All'
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Here are some of my recent projects that showcase my skills and experience
+    <section id="projects" className="py-24 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+            Featured Projects
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4 rounded-full" />
+          <p className="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
+            Projects that showcase my skills in building real-world applications
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform overflow-hidden group"
+        {/* Filter tabs */}
+        <motion.div
+          className="flex justify-center gap-2 mb-10 flex-wrap"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+        >
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-200 ${
+                activeCategory === cat
+                  ? 'bg-gray-900 text-white shadow-md'
+                  : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700'
+              }`}
             >
-              {/* Project Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <a
-                    href={project.liveUrl}
-                    className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink size={16} className="text-gray-700" />
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Github size={16} className="text-gray-700" />
-                  </a>
-                </div>
-              </div>
+              {cat}
+            </button>
+          ))}
+        </motion.div>
 
-              {/* Project Content */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-gray-900">{project.title}</h3>
-                  <div className="flex items-center text-gray-500 text-sm">
-                    <Calendar size={14} className="mr-1" />
-                    {project.date}
-                  </div>
-                </div>
-
-                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 text-xs font-medium rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex space-x-4">
-                  <a
-                    href={project.liveUrl}
-                    className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-4 rounded-lg font-medium text-center hover:from-blue-600 hover:to-purple-700 transition-all duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Live Demo
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    className="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium text-center hover:bg-gray-50 transition-all duration-200"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Code
-                  </a>
-                </div>
-              </div>
-            </div>
+        {/* Projects grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {filteredProjects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              isFeatured={project.featured && activeCategory === 'All'}
+            />
           ))}
         </div>
       </div>

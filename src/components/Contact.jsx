@@ -1,54 +1,56 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { motion } from 'framer-motion';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Copy,
+  Check,
+} from 'lucide-react';
+import { personal } from '../data/personal';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
+  const [copied, setCopied] = useState(false);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // Reset form and notify user
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsSubmitting(false);
-    alert('Message sent successfully!');
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personal.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback
+      const textArea = document.createElement('textarea');
+      textArea.value = personal.email;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   const contactInfo = [
     {
       icon: Mail,
-      title: 'Email',
-      value: 'mayank701130@gmail.com',
-      link: '',
+      label: 'Email',
+      value: personal.email,
+      action: copyEmail,
+      actionLabel: copied ? 'Copied!' : 'Copy',
+      actionIcon: copied ? Check : Copy,
     },
     {
       icon: Phone,
-      title: 'Phone',
-      value: '+91 7011300316',
-      link: 'tel: 7011300316',
+      label: 'Phone',
+      value: personal.phone,
+      href: `tel:${personal.phone.replace(/\s/g, '')}`,
     },
     {
       icon: MapPin,
-      title: 'Location',
-      value: 'Delhi,India',
-      link: '#',
+      label: 'Location',
+      value: personal.location,
     },
   ];
 
@@ -56,93 +58,118 @@ const Contact = () => {
     {
       icon: Github,
       name: 'GitHub',
-      url: 'https://github.com/Mayank9370',
-      color: 'hover:text-gray-900',
+      url: personal.social.github,
     },
     {
       icon: Linkedin,
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/mayank-kumar-079b42302/',
-      color: 'hover:text-blue-600',
+      url: personal.social.linkedin,
     },
-    // {
-    //   icon: Twitter,
-    //   name: 'Twitter',
-    //   url: 'https://twitter.com',
-    //   color: 'hover:text-blue-400',
-    // },
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            I'm always open to discussing new opportunities, creative projects, or partnerships.
-            Let's create something amazing together!
+    <section id="contact" className="py-24 bg-gray-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+            Get In Touch
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-4 rounded-full" />
+          <p className="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
+            I'm always open to discussing new opportunities and creative projects.
+            Let's build something amazing together!
           </p>
-        </div>
+        </motion.div>
 
-        <div className="">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div >
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Let's Connect</h3>
-              <div className="space-y-4">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon;
-                  return (
-                    <a
-                      key={index}
-                      href={info.link}
-                      className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 group"
-                    >
-                      <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full group-hover:scale-110 transition-transform duration-200">
-                        <Icon className="text-white" size={20} />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-gray-900">{info.title}</div>
-                        <div className="text-gray-600">{info.value}</div>
-                      </div>
-                    </a>
-                  );
-                })}
+        <div className="flex flex-col items-center">
+          {/* Main Contact Content Centerized */}
+          <motion.div
+            className="w-full space-y-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {contactInfo.map((info, index) => {
+                const Icon = info.icon;
+                const Wrapper = info.href ? 'a' : 'div';
+                const wrapperProps = info.href ? { href: info.href } : {};
+
+                return (
+                  <Wrapper
+                    key={index}
+                    {...wrapperProps}
+                    className="flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 group"
+                  >
+                    <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-4 shadow-lg shadow-blue-500/10">
+                      <Icon className="text-white" size={24} />
+                    </div>
+                    <div className="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">
+                      {info.label}
+                    </div>
+                    <div className="text-sm font-semibold text-gray-800 mb-4 break-all">
+                      {info.value}
+                    </div>
+                    {info.action && (
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          info.action();
+                        }}
+                        className="flex items-center gap-2 px-4 py-1.5 text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-full transition-colors"
+                      >
+                        <info.actionIcon size={14} />
+                        {info.actionLabel}
+                      </button>
+                    )}
+                  </Wrapper>
+                );
+              })}
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-8 items-stretch justify-center">
+              {/* Quick Response */}
+              <div className="flex-1 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100/50 text-center md:text-left">
+                <h4 className="text-base font-bold text-gray-800 mb-2">
+                  Quick Response
+                </h4>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  I typically respond within 24 hours. Whether you're looking to hire,
+                  collaborate, or just say hello — I'd love to hear from you!
+                </p>
+              </div>
+
+              {/* Social Links */}
+              <div className="flex flex-col items-center justify-center p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                <h4 className="text-sm font-bold text-gray-900 mb-4 uppercase tracking-widest">Connect With Me</h4>
+                <div className="flex gap-4">
+                  {socialLinks.map((social, index) => {
+                    const Icon = social.icon;
+                    return (
+                      <a
+                        key={index}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 bg-gray-50 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all duration-300 text-gray-500 shadow-sm hover:shadow-lg hover:shadow-blue-500/20"
+                        aria-label={social.name}
+                      >
+                        <Icon size={24} />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-
-            {/* Social Links */}
-            <div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Follow Me</h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={index}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-200 ${social.color} hover:scale-110 transform`}
-                    >
-                      <Icon size={24} />
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Additional Info */}
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6">
-              <h4 className="text-lg font-semibold text-gray-900 mb-3">Quick Response</h4>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                I typically respond to messages within 24 hours. Whether you're looking to hire,
-                collaborate, or just want to say hello, I'd love to hear from you!
-              </p>
-            </div>
-          </div>
-
+          </motion.div>
         </div>
       </div>
     </section>
