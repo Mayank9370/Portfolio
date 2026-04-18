@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+
 import {
   Mail,
   Phone,
@@ -71,12 +71,8 @@ const Contact = () => {
     <section id="contact" className="py-24 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             Get In Touch
@@ -86,16 +82,12 @@ const Contact = () => {
             I'm always open to discussing new opportunities and creative projects.
             Let's build something amazing together!
           </p>
-        </motion.div>
+        </div>
 
         <div className="flex flex-col items-center">
           {/* Main Contact Content Centerized */}
-          <motion.div
+          <div
             className="w-full space-y-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {contactInfo.map((info, index) => {
@@ -169,7 +161,7 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

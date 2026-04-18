@@ -1,16 +1,16 @@
 import React, { Suspense, lazy } from 'react';
-import ScrollProgress from './components/ScrollProgress';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 
 // Lazy load below-fold sections for performance
-const About = lazy(() => import('./components/About'));
-const Skills = lazy(() => import('./components/Skills'));
-const Experience = lazy(() => import('./components/Experience'));
-const Projects = lazy(() => import('./components/Projects'));
-const Certificates = lazy(() => import('./components/Certificates'));
-const Contact = lazy(() => import('./components/Contact'));
-const Footer = lazy(() => import('./components/Footer'));
+const About = lazy(() => new Promise(resolve => setTimeout(() => resolve(import('./components/About')), 200)));
+const Skills = lazy(() => new Promise(resolve => setTimeout(() => resolve(import('./components/Skills')), 200)));
+const Experience = lazy(() => new Promise(resolve => setTimeout(() => resolve(import('./components/Experience')), 200)));
+const Projects = lazy(() => new Promise(resolve => setTimeout(() => resolve(import('./components/Projects')), 200)));
+const Certificates = lazy(() => new Promise(resolve => setTimeout(() => resolve(import('./components/Certificates')), 200)));
+const Contact = lazy(() => new Promise(resolve => setTimeout(() => resolve(import('./components/Contact')), 200)));
+const Footer = lazy(() => new Promise(resolve => setTimeout(() => resolve(import('./components/Footer')), 200)));
 
 const SectionLoader = () => (
   <div className="flex items-center justify-center py-20">
@@ -21,7 +21,7 @@ const SectionLoader = () => (
 function App() {
   return (
     <div className="min-h-screen">
-      <ScrollProgress />
+
       <Navbar />
       <Hero />
       <Suspense fallback={<SectionLoader />}>

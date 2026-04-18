@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
 import { Menu, X, Home, User, Code, FolderOpen, Award, Mail, Briefcase, Download } from 'lucide-react';
 import { personal } from '../data/personal';
 
@@ -107,48 +107,39 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden overflow-hidden bg-gray-900/95 backdrop-blur-md border-t border-white/5"
-          >
-            <div className="px-4 py-3 space-y-1">
-              {navItems.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <motion.button
-                    key={item.id}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-colors duration-200 ${
-                      activeSection === item.id
-                        ? 'bg-blue-500/10 text-blue-400'
-                        : 'text-gray-400 hover:bg-white/5 hover:text-white'
-                    }`}
-                  >
-                    <Icon size={16} />
-                    {item.label}
-                  </motion.button>
-                );
-              })}
-              <a
-                href={personal.resumeUrl}
-                download="Mayank_Kumar_Resume.pdf"
-                className="flex items-center gap-2 w-full px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-xl mt-2"
-              >
-                <Download size={16} />
-                Download Resume
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div
+          className="lg:hidden overflow-hidden bg-gray-900/95 backdrop-blur-md border-t border-white/5 transition-all duration-300 transform origin-top"
+        >
+          <div className="px-4 py-3 space-y-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-colors duration-200 ${
+                    activeSection === item.id
+                      ? 'bg-blue-500/10 text-blue-400'
+                      : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  <Icon size={16} />
+                  {item.label}
+                </button>
+              );
+            })}
+            <a
+              href={personal.resumeUrl}
+              download="Mayank_Kumar_Resume.pdf"
+              className="flex items-center gap-2 w-full px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-xl mt-2 hover:scale-105 transition-transform duration-200"
+            >
+              <Download size={16} />
+              Download Resume
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

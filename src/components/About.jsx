@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+
 import {
   MapPin,
   Download,
@@ -47,48 +47,27 @@ const About = () => {
     document.body.removeChild(link);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
 
   return (
     <section id="about" className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             About Me
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full" />
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — Content */}
-          <motion.div
+          <div
             className="space-y-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
           >
             {/* Highlights */}
-            <motion.div
-              variants={childVariants}
+            <div
               className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100"
             >
               <h3 className="text-xl font-semibold text-gray-900 mb-5">
@@ -109,11 +88,10 @@ const About = () => {
                   );
                 })}
               </ul>
-            </motion.div>
+            </div>
 
             {/* Info Cards */}
-            <motion.div
-              variants={childVariants}
+            <div
               className="grid grid-cols-1 sm:grid-cols-3 gap-3"
             >
               {infoCards.map((card, i) => {
@@ -138,10 +116,10 @@ const About = () => {
                   </div>
                 );
               })}
-            </motion.div>
+            </div>
 
             {/* Download Button */}
-            <motion.div variants={childVariants}>
+            <div>
               <button
                 onClick={handleDownload}
                 className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
@@ -149,16 +127,12 @@ const About = () => {
                 <Download size={18} />
                 Download Resume
               </button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Right — Image */}
-          <motion.div
+          <div
             className="relative"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 z-10 pointer-events-none" />
@@ -180,7 +154,7 @@ const About = () => {
             </div>
             {/* Decorative dot */}
             <div className="absolute -top-3 -left-3 w-6 h-6 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-70" />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

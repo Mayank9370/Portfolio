@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+
 import { Briefcase, MapPin, Calendar, CheckCircle2 } from 'lucide-react';
 import { experiences } from '../data/experience';
 
@@ -8,12 +8,8 @@ const Experience = () => {
     <section id="experience" className="py-24 bg-gray-50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             Experience
@@ -22,7 +18,7 @@ const Experience = () => {
           <p className="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
             Professional experience building production-grade web applications
           </p>
-        </motion.div>
+        </div>
 
         {/* Timeline */}
         <div className="relative">
@@ -30,13 +26,9 @@ const Experience = () => {
           <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 opacity-30" />
 
           {experiences.map((exp, index) => (
-            <motion.div
+            <div
               key={index}
               className="relative pl-12 sm:pl-20 pb-12 last:pb-0"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
             >
               {/* Timeline dot */}
               <div className="absolute left-2 sm:left-6 top-1 w-5 h-5 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 border-4 border-gray-50 shadow-md" />
@@ -71,20 +63,16 @@ const Experience = () => {
                 {/* Bullet points */}
                 <ul className="space-y-3 mb-6">
                   {exp.points.map((point, i) => (
-                    <motion.li
+                    <li
                       key={i}
                       className="flex items-start gap-3 text-sm text-gray-600"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + i * 0.08 }}
                     >
                       <CheckCircle2
                         size={16}
                         className="text-green-500 mt-0.5 shrink-0"
                       />
                       <span>{point}</span>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
 
@@ -100,7 +88,7 @@ const Experience = () => {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

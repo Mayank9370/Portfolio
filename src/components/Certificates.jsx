@@ -1,16 +1,11 @@
 import React, { memo } from 'react';
-import { motion } from 'framer-motion';
+
 import { Award, ExternalLink, Calendar } from 'lucide-react';
 import { certificates } from '../data/certificates';
 
 const CertificateCard = memo(({ cert }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.3 }}
-    whileHover={{ y: -5 }}
-    className="bg-gray-800/60 rounded-2xl overflow-hidden border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 group hover:shadow-lg hover:shadow-black/20"
+  <div
+    className="bg-gray-800/60 rounded-2xl overflow-hidden border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 group hover:shadow-lg hover:shadow-black/20 hover:-translate-y-1"
   >
     {/* Image */}
     <div className="relative h-28 overflow-hidden">
@@ -66,7 +61,7 @@ const CertificateCard = memo(({ cert }) => (
         Verify
       </a>
     </div>
-  </motion.div>
+  </div>
 ));
 
 CertificateCard.displayName = 'CertificateCard';
@@ -76,12 +71,8 @@ const Certificates = () => {
     <section id="certificates" className="py-24 bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
             Certificates & Credentials
@@ -90,7 +81,7 @@ const Certificates = () => {
           <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
             Professional certifications validating my expertise and continuous learning
           </p>
-        </motion.div>
+        </div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+
 import { Code, Database, Globe, Wrench, Cpu } from 'lucide-react';
 import { skillCategories } from '../data/skills';
 
@@ -24,12 +24,8 @@ const Skills = () => {
     <section id="skills" className="py-24 bg-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
             Skills & Expertise
@@ -38,7 +34,7 @@ const Skills = () => {
           <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
             Here are the technologies and tools I work with to bring ideas to life
           </p>
-        </motion.div>
+        </div>
 
         {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -47,12 +43,8 @@ const Skills = () => {
             const themeBg = categoryThemeColors[category.title] || 'bg-blue-500';
 
             return (
-              <motion.div
+              <div
                 key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
                 className="bg-gray-900/50 rounded-3xl p-8 border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300"
               >
                 {/* Category Header */}
@@ -67,21 +59,16 @@ const Skills = () => {
 
                 {/* Badges Container */}
                 <div className="flex flex-wrap gap-3">
-                  {category.skills.map((skill, skillIndex) => (
-                    <motion.span
+                  {category.skills.map((skill) => (
+                    <span
                       key={skill.name}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
-                      whileHover={{ scale: 1.05 }}
-                      className="px-4 py-2 rounded-full bg-gray-800/80 text-gray-300 text-sm font-medium border border-gray-700/30 hover:text-white transition-colors cursor-default"
+                      className="px-4 py-2 rounded-full bg-gray-800/80 text-gray-300 text-sm font-medium border border-gray-700/30 hover:text-white transition-all duration-300 hover:scale-105 cursor-default"
                     >
                       {skill.name}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

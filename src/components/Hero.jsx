@@ -1,10 +1,21 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { ChevronDown, Github, Linkedin, ArrowRight, Download } from 'lucide-react';
-import { personal } from '../data/personal';
+import React, { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import {
+  ChevronDown,
+  Github,
+  Linkedin,
+  ArrowRight,
+  Download,
+} from "lucide-react";
+import { personal } from "../data/personal";
 
-const useTypingEffect = (words, typingSpeed = 100, deletingSpeed = 60, pauseTime = 2000) => {
-  const [text, setText] = useState('');
+const useTypingEffect = (
+  words,
+  typingSpeed = 100,
+  deletingSpeed = 60,
+  pauseTime = 2000,
+) => {
+  const [text, setText] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -14,7 +25,7 @@ const useTypingEffect = (words, typingSpeed = 100, deletingSpeed = 60, pauseTime
 
     if (!isDeleting && text === currentWord) {
       timeout = setTimeout(() => setIsDeleting(true), pauseTime);
-    } else if (isDeleting && text === '') {
+    } else if (isDeleting && text === "") {
       setIsDeleting(false);
       setWordIndex((prev) => (prev + 1) % words.length);
     } else {
@@ -23,15 +34,23 @@ const useTypingEffect = (words, typingSpeed = 100, deletingSpeed = 60, pauseTime
           setText(
             isDeleting
               ? currentWord.substring(0, text.length - 1)
-              : currentWord.substring(0, text.length + 1)
+              : currentWord.substring(0, text.length + 1),
           );
         },
-        isDeleting ? deletingSpeed : typingSpeed
+        isDeleting ? deletingSpeed : typingSpeed,
       );
     }
 
     return () => clearTimeout(timeout);
-  }, [text, wordIndex, isDeleting, words, typingSpeed, deletingSpeed, pauseTime]);
+  }, [
+    text,
+    wordIndex,
+    isDeleting,
+    words,
+    typingSpeed,
+    deletingSpeed,
+    pauseTime,
+  ]);
 
   return text;
 };
@@ -40,7 +59,7 @@ const Hero = () => {
   const typedText = useTypingEffect(personal.roles, 80, 50, 2200);
 
   const scrollToProjects = () => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const containerVariants = {
@@ -73,7 +92,7 @@ const Hero = () => {
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `radial-gradient(circle, #fff 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
+          backgroundSize: "40px 40px",
         }}
       />
 
@@ -95,7 +114,7 @@ const Hero = () => {
           variants={childVariants}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight"
         >
-          Hi, I'm{' '}
+          Hi, I'm{" "}
           <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             {personal.name}
           </span>
@@ -124,8 +143,12 @@ const Hero = () => {
         >
           {personal.stats.map((stat, i) => (
             <div key={i} className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-white">{stat.value}</div>
-              <div className="text-xs sm:text-sm text-gray-500 mt-1">{stat.label}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-white">
+                {stat.value}
+              </div>
+              <div className="text-xs sm:text-sm text-gray-500 mt-1">
+                {stat.label}
+              </div>
             </div>
           ))}
         </motion.div>
@@ -156,7 +179,10 @@ const Hero = () => {
         </motion.div>
 
         {/* Social icons */}
-        <motion.div variants={childVariants} className="flex justify-center gap-4">
+        <motion.div
+          variants={childVariants}
+          className="flex justify-center gap-4"
+        >
           <a
             href={personal.social.github}
             target="_blank"
@@ -182,7 +208,7 @@ const Hero = () => {
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
           <ChevronDown className="text-gray-600" size={24} />
         </motion.div>

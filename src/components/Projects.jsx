@@ -1,32 +1,37 @@
-import React, { useState, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, memo, useMemo, useEffect } from 'react';
+
 import { ExternalLink, Github, Calendar, Star, ArrowUpRight } from 'lucide-react';
 import { projects } from '../data/projects';
 
 const categories = ['All', ...new Set(projects.map((p) => p.category))];
 
-const ProjectCard = memo(({ project, isFeatured }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.3 }}
-    whileHover={{ y: -5 }}
-    className={`bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all duration-300 ${
-      isFeatured ? 'md:col-span-2 md:grid md:grid-cols-2' : ''
-    }`}
-  >
+const ProjectCard = memo(({ project, isFeatured }) => {
+  const [showImage, setShowImage] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowImage(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div
+      className={`bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all duration-300 hover:-translate-y-[5px] will-change-transform ${
+        isFeatured ? 'md:col-span-2 md:grid md:grid-cols-2' : ''
+      }`}
+    >
     {/* Image */}
     <div className="relative overflow-hidden">
-      <img
-        src={project.image}
-        alt={project.title}
-        loading="lazy"
-        decoding="async"
-        className={`w-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ${
-          isFeatured ? 'h-full min-h-[240px]' : 'h-48'
-        }`}
-      />
+      {showImage && (
+        <img
+          src={project.image}
+          alt={project.title}
+          loading="lazy"
+          decoding="async"
+          className={`w-full object-cover group-hover:scale-[1.03] transition-transform duration-500 will-change-transform ${
+            isFeatured ? 'h-full min-h-[240px]' : 'h-48'
+          }`}
+        />
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* Featured badge */}
@@ -131,29 +136,35 @@ const ProjectCard = memo(({ project, isFeatured }) => (
         </a>
       </div>
     </div>
-  </motion.div>
-));
+    </div>
+  );
+});
 
 ProjectCard.displayName = 'ProjectCard';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [visibleCount, setVisibleCount] = useState(4);
 
-  const filteredProjects =
-    activeCategory === 'All'
+  const filteredProjects = useMemo(() => {
+    return activeCategory === 'All'
       ? projects
       : projects.filter((p) => p.category === activeCategory);
+  }, [activeCategory]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisibleCount(filteredProjects.length);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [filteredProjects]);
 
   return (
     <section id="projects" className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <div
           className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             Featured Projects
@@ -162,15 +173,11 @@ const Projects = () => {
           <p className="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
             Projects that showcase my skills in building real-world applications
           </p>
-        </motion.div>
+        </div>
 
         {/* Filter tabs */}
-        <motion.div
+        <div
           className="flex justify-center gap-2 mb-10 flex-wrap"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.1 }}
         >
           {categories.map((cat) => (
             <button
@@ -185,11 +192,11 @@ const Projects = () => {
               {cat}
             </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Projects grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredProjects.map((project) => (
+          {filteredProjects.slice(0, visibleCount).map((project) => (
             <ProjectCard
               key={project.title}
               project={project}
