@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {
   MapPin,
@@ -8,53 +8,50 @@ import {
   Code2,
   Server,
   BookOpen,
-} from 'lucide-react';
-import image from '../assets/image.png';
-import { personal } from '../data/personal';
+} from "lucide-react";
+import image from "../assets/image.png";
+import { personal } from "../data/personal";
 
 const highlights = [
-  { icon: Code2, text: 'Full Stack Developer — MERN Stack' },
-  { icon: Server, text: 'Built scalable production apps (Resume Builder)' },
-  { icon: BookOpen, text: 'Strong in DSA & System Design' },
+  { icon: Code2, text: "Full Stack Developer — MERN Stack" },
+  { icon: Server, text: "Built scalable production apps (Resume Builder)" },
+  { icon: BookOpen, text: "Strong in DSA & System Design" },
 ];
 
 const infoCards = [
   {
     icon: MapPin,
-    label: 'Location',
+    label: "Location",
     value: personal.location,
   },
   {
     icon: GraduationCap,
-    label: 'Education',
+    label: "Education",
     value: personal.education.degree,
     sub: personal.education.institution,
   },
   {
     icon: Sparkles,
-    label: 'Status',
+    label: "Status",
     value: personal.availability,
   },
 ];
 
 const About = () => {
   const handleDownload = () => {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = personal.resumeUrl;
-    link.download = 'Mayank_Kumar_Resume.pdf';
+    link.download = "Mayank_Kumar_Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
-
   return (
     <section id="about" className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             About Me
           </h2>
@@ -63,13 +60,9 @@ const About = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — Content */}
-          <div
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             {/* Highlights */}
-            <div
-              className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100"
-            >
+            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100">
               <h3 className="text-xl font-semibold text-gray-900 mb-5">
                 What I Do
               </h3>
@@ -91,9 +84,7 @@ const About = () => {
             </div>
 
             {/* Info Cards */}
-            <div
-              className="grid grid-cols-1 sm:grid-cols-3 gap-3"
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {infoCards.map((card, i) => {
                 const Icon = card.icon;
                 return (
@@ -131,9 +122,7 @@ const About = () => {
           </div>
 
           {/* Right — Image */}
-          <div
-            className="relative"
-          >
+          <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 z-10 pointer-events-none" />
               <img
@@ -149,7 +138,9 @@ const About = () => {
                 <div className="text-2xl font-bold text-gray-900">
                   {personal.stats[1].value}
                 </div>
-                <div className="text-xs text-gray-500">{personal.stats[1].label}</div>
+                <div className="text-xs text-gray-500">
+                  {personal.stats[1].label}
+                </div>
               </div>
             </div>
             {/* Decorative dot */}

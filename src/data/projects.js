@@ -13,7 +13,7 @@ export const projects = [
       'A production-grade resume builder with a custom pagination engine, multi-template system, drag-and-drop section reordering, and high-fidelity PDF export. Built during my internship at ScaleSage Solutions.',
     image: resumeBuilderImg,
     technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux', 'PDF.js'],
-    liveUrl: '#',
+    liveUrl: 'https://resume-builder-navy-five.vercel.app',
     githubUrl: 'https://github.com/Mayank9370',
     date: '2026',
     category: 'Full Stack',
