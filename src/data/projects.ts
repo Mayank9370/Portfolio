@@ -7,7 +7,7 @@ export const projects: Project[] = [
       "A production-grade resume builder with a custom pagination engine, multi-template system, drag-and-drop section reordering, and high-fidelity PDF export. Built during my internship at ScaleSage Solutions.",
     image: "/images/resumeBuilder.jpg",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Redux", "PDF.js"],
-    liveUrl: "https://resume-builder-navy-five.vercel.app",
+    liveUrl: "https://resumebuilder-frontend-zyvs.onrender.com",
     githubUrl: "https://github.com/Mayank9370",
     date: "2026",
     category: "Full Stack",
