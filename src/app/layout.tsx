@@ -26,34 +26,42 @@ const spaceGrotesk = Space_Grotesk({
  * manual <meta> approach in the Vite SPA.
  */
 export const metadata: Metadata = {
-  title: "Mayank Kumar | Full Stack Developer",
+  title: "Mayank Kumar | AI Full-Stack Developer & Software Engineer",
   description:
-    "Full Stack Developer portfolio — MERN Stack, React, Node.js, TypeScript, System Design, and more. Building scalable and impactful web applications.",
+    "AI Full-Stack Developer & Software Engineer — React, Node.js, System Design, Docker, AWS, LangChain, and RAG. Building scalable full-stack applications and AI-powered solutions.",
   keywords: [
     "Mayank Kumar",
+    "AI Full-Stack Developer",
+    "Software Engineer",
     "Full Stack Developer",
-    "MERN Stack",
+    "Backend Developer",
     "React",
     "Node.js",
+    "Next.js",
     "TypeScript",
+    "System Design",
+    "Docker",
+    "AWS",
+    "Redis",
+    "LangChain",
+    "RAG",
+    "AI Engineer",
     "Portfolio",
-    "Software Engineer",
-    "Web Developer",
   ],
   authors: [{ name: "Mayank Kumar" }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Mayank Kumar | Full Stack Developer",
+    title: "Mayank Kumar | AI Full-Stack Developer & Software Engineer",
     description:
-      "Full Stack Developer passionate about creating amazing digital experiences. MERN Stack, React, Node.js, TypeScript.",
+      "Building scalable full-stack applications, reliable backend systems, and AI-powered solutions. React, Node.js, System Design, Docker, AWS, LangChain.",
     siteName: "Mayank Kumar Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mayank Kumar | Full Stack Developer",
+    title: "Mayank Kumar | AI Full-Stack Developer & Software Engineer",
     description:
-      "Full Stack Developer passionate about creating amazing digital experiences.",
+      "AI Full-Stack Developer & Software Engineer building scalable systems and intelligent applications.",
   },
   robots: {
     index: true,
@@ -81,7 +89,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Mayank Kumar",
-              jobTitle: "Full Stack Developer",
+              jobTitle: "AI Full-Stack Developer & Software Engineer",
               url: "https://mayank-kumar.dev",
               sameAs: [
                 "https://github.com/Mayank9370",
@@ -93,6 +101,11 @@ export default function RootLayout({
                 "TypeScript",
                 "MongoDB",
                 "Next.js",
+                "System Design",
+                "Docker",
+                "AWS",
+                "LangChain",
+                "AI Engineering",
                 "Full Stack Development",
               ],
             }),

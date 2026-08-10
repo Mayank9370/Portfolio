@@ -2,10 +2,10 @@ import type { PersonalInfo } from "@/types";
 
 export const personal: PersonalInfo = {
   name: "Mayank Kumar",
-  roles: ["Full Stack Developer", "MERN Stack", "Problem Solver"],
-  tagline: "Building scalable and impactful web applications",
+  roles: ["AI Full-Stack Developer", "Software Engineer", "Problem Solver"],
+  tagline: "Building scalable full-stack applications and AI-powered solutions",
   subtitle:
-    "Full Stack Developer passionate about creating amazing digital experiences",
+    "AI Full-Stack Developer & Software Engineer building scalable systems and intelligent applications",
   email: "mayank701130@gmail.com",
   phone: "+91 7011300316",
   location: "Delhi, India",

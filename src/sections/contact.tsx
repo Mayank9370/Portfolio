@@ -28,7 +28,7 @@ export function Contact() {
       <SectionHeader
         label="What's Next?"
         title="Get In Touch"
-        description="Interested in building polished, scalable full-stack experiences together? I'm currently open to new opportunities."
+        description="Interested in building scalable full-stack systems or AI-powered applications together? I'm currently open to new opportunities."
         theme="dark"
       />
 

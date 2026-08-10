@@ -27,7 +27,7 @@ export function Hero() {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const techStack = ["React", "TypeScript", "Redux", "Next.js", "Tailwind"];
+  const techStack = ["React", "Next.js", "Node.js", "System Design", "Docker", "AI / GenAI"];
 
   return (
     <SectionWrapper
@@ -54,7 +54,7 @@ export function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
             </span>
-            Available for Full Stack & Product Engineering Roles
+            Available for Full-Stack, Backend & Software Engineering Roles
           </span>
         </motion.div>
 
@@ -65,7 +65,7 @@ export function Hero() {
         >
           Hi, I&apos;m {personal.name} — <br />
           <span className="text-slate-400 font-medium text-4xl md:text-6xl mt-2 block">
-            Full Stack Developer
+            AI Full-Stack Developer
           </span>
         </motion.h1>
 
@@ -74,7 +74,7 @@ export function Hero() {
           variants={item}
           className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light"
         >
-          Crafting scalable, polished web experiences. I build fast, modern, and reliable interfaces with a focus on UI architecture.
+          Building scalable full-stack applications, reliable backend systems, and AI-powered solutions.
         </motion.p>
 
         {/* Tech Stack Pills */}

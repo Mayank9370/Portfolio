@@ -13,7 +13,7 @@ export function About() {
       <SectionHeader
         label="About Me"
         title="Engineering Philosophy"
-        description="I build interfaces that are not just visually appealing, but architecturally sound and highly performant."
+        description="I build end-to-end software systems — from responsive interfaces and robust APIs to scalable architectures and AI-powered applications."
         theme="light"
       />
 
@@ -22,13 +22,13 @@ export function About() {
         <AnimatedSection delay={0.1}>
           <div className="space-y-6 text-slate-600 leading-relaxed text-lg font-light">
             <p>
-              I am a Full Stack Developer specializing in React and Next.js, with a strong focus on building scalable web applications. My approach to engineering bridges the gap between design and architecture, ensuring that every user interaction feels instantaneous and intuitive.
+              I am an AI Full-Stack Developer & Software Engineer with hands-on experience across the entire software stack — from building responsive React interfaces and designing robust Node.js APIs to working with scalable backend architectures, cloud infrastructure, and AI-powered applications.
             </p>
             <p>
-              Currently, my work revolves around solving complex UI challenges—such as deterministic pagination, advanced state management, and real-time data synchronization. I believe in writing code that is clean, modular, and maintainable.
+              My internship work involved solving complex engineering challenges — custom deterministic pagination, centralized state management, document parsing services, and modular REST API design. Beyond that, I have hands-on practice with system design concepts, Docker, AWS, and modern GenAI tools like LangChain and RAG.
             </p>
             <p>
-              When I'm not coding, I'm analyzing system designs, exploring new rendering patterns, or refining design systems to create the best possible developer and user experience.
+              I believe in writing code that is clean, modular, and maintainable. I am constantly exploring new backend patterns, cloud-native tools, and AI engineering workflows to build better software systems.
             </p>
           </div>
           
@@ -44,7 +44,7 @@ export function About() {
                 <Zap size={18} />
               </div>
             </div>
-            <p className="text-sm text-slate-500 font-medium">Focused on performance & UX</p>
+            <p className="text-sm text-slate-500 font-medium">Full-stack & AI engineering</p>
           </div>
         </AnimatedSection>
 
@@ -77,7 +77,7 @@ export function About() {
                   Constantly Learning
                 </h4>
                 <p className="text-slate-500 text-sm">
-                  Actively studying advanced Next.js patterns, WebGL, and full-stack system design to push the boundaries of what the web can do.
+                  Actively studying system design, cloud-native architectures, and AI engineering — including LangChain, RAG, and Docker — to build production-grade software systems.
                 </p>
               </div>
               <div className="w-16 h-16 shrink-0 rounded-full bg-slate-50 border-4 border-white shadow-sm flex items-center justify-center overflow-hidden">
